@@ -1,6 +1,6 @@
 {
-  "app_id":"id here",
-  "api_key":"id here",
-  "gcm_key": "id here",
+  "app_id":"f92b4a09",
+  "api_key":"49aa56af37bc366e906645234546f073fbd3a35e497e5320",
+  "gcm_key": "AIzaSyATAdSxMfJRapSFBM_OtbriOMJh_mKRyIk",
   "dev_push":false
 }

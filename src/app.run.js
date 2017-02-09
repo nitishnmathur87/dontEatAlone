@@ -15,7 +15,7 @@
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if ($window.navigator.splashscreen) $window.navigator.splashscreen.hide();
-        
+
 
             if ($window.StatusBar) {
                 // org.apache.cordova.statusbar required
@@ -26,13 +26,9 @@
                 $window.cordova.logger.__onDeviceReady();
             }
 
-            $rootScope.$on('$cordovaPushV5:notificationReceived', function(event, data) {
-               
-
-            });
-
-            $rootScope.$on('$cordovaPushV5:errorOccurred', function(event, error) {
-               
+            $rootScope.$on('cloud:push:notification', function(event, data) {
+                var msg = data.message;
+                alert(msg.title + ': ' + msg.text);
             });
 
         });

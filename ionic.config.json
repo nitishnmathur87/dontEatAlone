@@ -1,6 +1,6 @@
 {
-  "name": "App Name here",
-  "app_id": "App id here",
+  "name": "dontEatAlone",
+  "app_id": "f92b4a09",
   "proxies": [
     {
       "path": "/api",
