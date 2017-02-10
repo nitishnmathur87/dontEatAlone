@@ -4,6 +4,7 @@
     angular.module('app', [
         // 3rd party
         'ionic',
+        'ionic.cloud',
         'ionic.service.core', // needed for ionic analytics
         'ionic.service.analytics',
         'ngCordova',
@@ -22,7 +23,28 @@
         .constant('DefaultLanguage', 'en-US')
         .config(translateConfig)
         .config(appConfig)
-        .config(ionicConfig);
+        .config(ionicConfig)
+        .config(pushConfig);
+
+    function pushConfig($ionicCloudProvider) {
+        $ionicCloudProvider.init({
+            "core": {
+                "app_id": "f92b4a09"
+            },
+            "push": {
+                "sender_id": "1035774357255",
+                "pluginConfig": {
+                    "ios": {
+                        "badge": true,
+                        "sound": true
+                    },
+                    "android": {
+                        "iconColor": "#343434"
+                    }
+                }
+            }
+        });
+    }
 
     // @ngInject
     function translateConfig($translateProvider, DefaultLanguage) {
