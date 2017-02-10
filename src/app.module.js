@@ -17,7 +17,8 @@
 
         // services
         'app.auth',
-        'app.login'
+        'app.login',
+        'app.register'
     ])
         .constant('AvailableLanguages', ['en-US', 'ru-RU', 'el-GR'])
         .constant('DefaultLanguage', 'en-US')

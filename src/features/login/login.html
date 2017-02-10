@@ -1,5 +1,22 @@
-<ion-view class="login" cache-view="false">
-    <ion-content scroll="true">
-        <button class="button button-block" ng-click="loginVm.registerForPush()">Click For push</button>
+<ion-view class="login" cache-view="false" title="Login">
+    <ion-content scroll="true" class="padding">
+        <form name="loginForm" no-validate>
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" placeholder="Username" ng-model="loginVm.data.username" required>
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Password" ng-model="loginVm.data.password" required>
+                </label>
+            </div>
+            <div class="row">
+                <button class="button button-block button-calm col"
+                        ng-click="loginVm.login()"
+                        ng-disabled="loginForm.$invalid">Login</button>
+                <button class="button button-block button-calm col"
+                        ui-sref="app.register">Sign Up</button>
+            </div>
+        </form>
+        <a>Forgot password?</a>
     </ion-content>
 </ion-view>

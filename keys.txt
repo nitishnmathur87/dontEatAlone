@@ -1,6 +1,7 @@
-google api key : 
-sender id: 
-generate keystore: keytool -genkey -v -keystore nexstar.keystore -alias nexstar -keyalg RSA -keysize 2048 -validity 10000
+google api key :
+sender id:
+generate keystore: keytool -genkey -v -keystore dontEatAlone.keystore -alias nexstar -keyalg RSA -keysize 2048 -validity 10000
+password: egen123
 
 steps to build android :
 

@@ -1,0 +1,40 @@
+<ion-view class="register" cache-view="false">
+    <ion-content scroll="true" class="padding">
+        <form name="registerForm" no-validate>
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">First Name</span>
+                    <input type="text" placeholder="John" ng-model="registerVm.data.firstName" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Last Name</span>
+                    <input type="text" placeholder="Doe" ng-model="registerVm.data.lastName" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Age</span>
+                    <input type="number" placeholder="12" ng-model="registerVm.data.age" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Email</span>
+                    <input type="text" placeholder="Last Name" ng-model="registerVm.data.email" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="Password" ng-model="registerVm.data.password" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Phone</span>
+                    <input type="number" placeholder="Phone Number" ng-model="registerVm.data.phone" required>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Gender</span>
+                    <ion-list>
+                        <ion-radio ng-model="registerVm.data.gender" ng-value="'Male'">Male</ion-radio>
+                        <ion-radio ng-model="registerVm.data.gender" ng-value="'Female'">Female</ion-radio>
+                    </ion-list>
+                </label>
+            </div>
+            <button class="button button-link" ng-click="registerVm.gotoHome()">Sign Up</button>
+        </form>
+    </ion-content>
+</ion-view>

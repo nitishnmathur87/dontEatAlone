@@ -5,53 +5,24 @@
             .controller('LoginController', LoginController);
 
         // @ngInject
-        function LoginController($window, AuthService, $state, $ionicPush) {
+        function LoginController($window, AuthService, $ionicPush) {
             var loginVm = this;
 
 
-            loginVm.validateLogin = validateLogin;
-            loginVm.registerForPush = registerForPush;
+            loginVm.login = login;
+            loginVm.data = {};
+
+            function login() {
+                console.log('user logged in');
+                console.log(loginVm.data.username, loginVm.data.password);
+                registerForPush();
+            }
 
             function registerForPush() {
                 $ionicPush.register().then(function(t) {
                     return $ionicPush.saveToken(t);
                 }).then(function(t) {
                     console.log('Token saved:', t.token);
-                });
-            }
-
-            function validateLogin() {
-                AuthService.authenticate(loginVm.email, loginVm.password)
-                    .then(function(resp) {
-                        _setUpPush();
-                    }, function() {
-
-                    });
-            }
-
-            function _setUpPush() {
-                $window.Ionic.Auth.login('basic', {}, {
-                    'email': loginVm.email,
-                    'password': loginVm.email
-                }).then(function (user) {
-                    AuthService.registerForPush(user, true);
-                }, function() {
-                    // or register and then login
-                    $window.Ionic.Auth.signup({
-                        'email': loginVm.email,
-                        'password': loginVm.email
-                    }).then(function (res) {
-                        $window.Ionic.Auth.login('basic', {}, {
-                            'email': loginVm.email,
-                            'password': loginVm.email
-                        }).then(function (user) {
-                            AuthService.registerForPush(user, true);
-                        }, function() {
-
-                        });
-                    }, function() {
-
-                    });
                 });
             }
         }
