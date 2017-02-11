@@ -5,7 +5,7 @@
             .controller('LoginController', LoginController);
 
         // @ngInject
-        function LoginController($window, AuthService, $ionicPush) {
+        function LoginController($state, AuthService, $ionicPush) {
             var loginVm = this;
 
 
@@ -23,6 +23,7 @@
                     return $ionicPush.saveToken(t);
                 }).then(function(t) {
                     console.log('Token saved:', t.token);
+                    $state.go('app.home');
                 });
             }
         }

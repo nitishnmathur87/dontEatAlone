@@ -14,9 +14,10 @@
                         ng-click="loginVm.login()"
                         ng-disabled="loginForm.$invalid">Login</button>
                 <button class="button button-block button-calm col"
-                        ui-sref="app.register">Sign Up</button>
+                        ui-sref="app.login.register">Sign Up</button>
             </div>
         </form>
-        <a>Forgot password?</a>
+        <button class="button button-clear button-calm"
+                ui-sref="app.login.forgotPassword">Forgot Password</button>
     </ion-content>
 </ion-view>
