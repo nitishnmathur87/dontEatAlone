@@ -9,6 +9,7 @@
         $stateProvider
             .state('app.home', {
                 url: '/home',
+                abstract: true,
                 views: {
                     'appView': {
                         templateUrl: 'features/home/home.html',

@@ -7,5 +7,11 @@
     // @ngInject
     function MoodController() {
         var mVm = this;
+        mVm.preference = {};
+        mVm.searchPartners = searchPartners;
+
+        function searchPartners() {
+            console.log(mVm.preference);
+        }
     }
 }(angular));

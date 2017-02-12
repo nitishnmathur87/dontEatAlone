@@ -5,12 +5,13 @@
         .controller('RegisterController', RegisterController);
 
     // @ngInject
-    function RegisterController() {
+    function RegisterController($state) {
         var registerVm = this;
         registerVm.gotoHome = gotoHome;
 
         function gotoHome() {
             console.log('Home page');
+            $state.go('app.home.mood.whatToEat');
         }
     }
 }(angular));

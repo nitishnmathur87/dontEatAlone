@@ -12,7 +12,6 @@
         'pascalprecht.translate',
         'ngIOS9UIWebViewPatch',
         'ui.router',
-        'ionic-material',
         'ui.bootstrap',
 
         // services

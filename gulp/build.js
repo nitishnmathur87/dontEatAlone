@@ -9,6 +9,19 @@ var $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
+gulp.task('prepare:runbrowser', function() {
+    runSequence('configInjector:browser',
+        'ioconfig',
+        'scripts:browser',
+        'styles',
+        'inject:browser',
+        'partials',
+        'html:browser',
+        'fonts',
+        'other',
+        'watch');
+});
+
 gulp.task('partials', function () {
     return gulp.src([
         path.join(conf.paths.src, '/**/*.html'),
