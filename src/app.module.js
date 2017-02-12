@@ -13,6 +13,7 @@
         'ngIOS9UIWebViewPatch',
         'ui.router',
         'ui.bootstrap',
+        'firebase',
 
         // services
         'app.auth',
