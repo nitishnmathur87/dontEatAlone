@@ -17,13 +17,12 @@
             function login() {
                 firebase.auth().signInWithEmailAndPassword(loginVm.data.username, loginVm.data.password).then(function(success) {
                     console.log('user logged in');
-                    $state.go('app.home');
-                    console.log(success);
+                    $state.go('app.home.mood.whatToEat');
+                    registerForPush();
                 }).catch(function(error) {
-                    console.log("here");
+                    alert(error.message);
                     console.log(error.code, error.message);
                 });
-                registerForPush();
             }
 
             function registerForPush() {
@@ -31,7 +30,6 @@
                     return $ionicPush.saveToken(t);
                 }).then(function(t) {
                     console.log('Token saved:', t.token);
-
                 });
             }
         }
