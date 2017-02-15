@@ -5,7 +5,7 @@
             <div class="list">
                 <label class="item item-input item-stacked-label">
                     <span class="input-label" >Where do you want to eat</span>
-                    <input type="text" placeholder="Enter City or zip code, example: 60563" ng-model="mVm.preference.location" required>
+                    <input type="number" placeholder="Enter zip code, example: 60563" ng-model="mVm.preference.location" required>
                 </label>
             </div>
             <button class="button button-block button-balanced"  ui-sref="app.home.mood.genderPreference" ng-disabled="location.$invalid">Next</button>

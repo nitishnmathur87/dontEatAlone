@@ -37,7 +37,7 @@
                     */
                     registerVm.data.uid = success.uid;
                     //console.log(registerVm.data);
-                    firebase.database().ref('users/').push(registerVm.data);
+                    firebase.database().ref('users/' + registerVm.data.uid).set(registerVm.data);
                     $state.go('app.home.mood.whatToEat');
             }).catch(function(error) {
                     alert(error.message);
