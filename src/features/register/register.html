@@ -1,10 +1,4 @@
 <ion-view class="register" cache-view="false">
-    <ion-nav-bar class="bar-positive">
-        <ion-nav-back-button></ion-nav-back-button>
-        <ion-nav-buttons side="right">
-            <i class="icon ion-ios-bell-outline"></i>
-        </ion-nav-buttons>
-    </ion-nav-bar>
     <ion-content scroll="true" class="padding">
         <form name="registerForm" no-validate>
             <div class="list">
@@ -43,4 +37,11 @@
             <button class="button button-block button-assertive" ng-click="registerVm.gotoHome()" ng-disabled="registerForm.$invalid">Sign Up</button>
         </form>
     </ion-content>
+    <ion-footer-bar class="bar-assertive">
+        <ion-nav-bar>
+            <button class="input-label" ng-click="hVm.goBack()">
+                <i class="icon ion-ios-arrow-thin-left"></i>
+            </button>
+        </ion-nav-bar>
+    </ion-footer-bar>
 </ion-view>

@@ -1,3 +1,18 @@
-.app {
+ion-content {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../resources/img/bg.jpg');
+}
 
+.has-header {
+    top: 100px !important;
+}
+
+.bar-style {
+    height: 100px !important;
+}
+
+.input-label {
+    color: whitesmoke;
 }

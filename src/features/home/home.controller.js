@@ -5,7 +5,12 @@
         .controller('HomeController', HomeController);
 
     // @ngInject
-    function HomeController() {
+    function HomeController($ionicHistory) {
         var hVm = this;
+        hVm.goBack = goBack;
+
+        function goBack() {
+            $ionicHistory.goBack();
+        }
     }
 }(angular));
