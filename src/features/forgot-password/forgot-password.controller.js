@@ -19,7 +19,7 @@
             auth.sendPasswordResetEmail(forgotVm.data.email).then(function() {
                 $state.go('app.login');
             }, function(error) {
-                console.log(error.message);
+                alert(error.message);
             });
         }
     }

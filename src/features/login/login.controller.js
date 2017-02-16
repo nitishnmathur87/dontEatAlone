@@ -5,7 +5,7 @@
             .controller('LoginController', LoginController);
 
         // @ngInject
-        function LoginController($state, AuthService, $ionicPush, $firebaseObject, $firebaseAuth) {
+        function LoginController($state, AuthService, $firebaseObject, $firebaseAuth) {
             var loginVm = this;
 
             loginVm.rootRef = firebase.database().ref();
@@ -16,20 +16,9 @@
 
             function login() {
                 firebase.auth().signInWithEmailAndPassword(loginVm.data.username, loginVm.data.password).then(function(success) {
-                    console.log('user logged in');
                     $state.go('app.home.mood.whatToEat');
-                    registerForPush();
                 }).catch(function(error) {
                     alert(error.message);
-                    console.log(error.code, error.message);
-                });
-            }
-
-            function registerForPush() {
-                $ionicPush.register().then(function(t) {
-                    return $ionicPush.saveToken(t);
-                }).then(function(t) {
-                    console.log('Token saved:', t.token);
                 });
             }
         }

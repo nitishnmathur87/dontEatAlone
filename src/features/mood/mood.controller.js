@@ -21,11 +21,11 @@
                     var userExists = _.findKey(snapshot.val(), { uid: firebase.auth().currentUser.uid });
 
                     if (userExists) {
-                        firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location' + mVm.preference.location + '/' + userExists ).update(obj)
+                        firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + userExists ).update(obj)
                     } else {
-                        firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location' + mVm.preference.location).push(obj);
+                        firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location).push(obj);
                     }
-                    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location' + mVm.preference.location)
+                    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location)
                         .once('value')
                         .then(function(snapshot) {
                             if (_.size(snapshot.val()) > 1) {
