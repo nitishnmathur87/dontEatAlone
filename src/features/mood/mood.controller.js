@@ -9,61 +9,37 @@
         var mVm = this;
         mVm.preference = {};
         mVm.searchPartners = searchPartners;
+        mVm.statusMessage = '';
 
         function searchPartners() {
             console.log(mVm.preference);
             var obj = {
                 uid: firebase.auth().currentUser.uid
             };
-            firebase.database().ref('genderPref/')
+            firebase.database().ref('users/' + firebase.auth().currentUser.uid)
                 .once('value')
-                .then(function(snapshot) {
-                    if(snapshot.hasChildren()) {
-                        snapshot.forEach(function(childSnapshot) {
-                            if (childSnapshot.hasChildren()) {
-                                childSnapshot.forEach(function(subChildSnapshot) {
-                                    if (subChildSnapshot.hasChildren()) {
-                                        subChildSnapshot.forEach(function(subSubChildSnapshot) {
-                                            if (subSubChildSnapshot.hasChildren()) {
-                                                subSubChildSnapshot.forEach(function(subSubSubChildSnapshot) {
-                                                    if (subSubSubChildSnapshot.hasChildren()) {
-                                                        subSubSubChildSnapshot.forEach(function(subsSubSubSubChildSnapshot) {
-                                                            if (_.has(subsSubSubSubChildSnapshot.val(), { uid: firebase.auth().currentUser.uid })) {
-                                                                var key = subsSubSubSubChildSnapshot.key;
-                                                                var path = subsSubSubSubChildSnapshot.ref().toString();
-                                                                console.log(path);
-
-                                                                firebase.database().ref(path).update(null);
-                                                            }
-                                                            firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location).push(obj);
-                                                        });
-                                                    }
-                                                });
-                                            }
-                                        })
-                                    }
-                                })
-                            }
-                        })
-                    } else {
-                        firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location).push(obj);
+                .then(function (userData) {
+                    var user = userData.val();
+                    if (user.searchPath) { // if user already had a request before
+                        // delete the user entry at searchPath
+                        firebase.database().ref(user.searchPath).remove();
                     }
-                    //
-                    //if (userExists) {
-                    //    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + userExists ).update(obj)
-                    //} else {
-                    //    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location).push(obj);
-                    //}
-                    //firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location)
-                    //    .once('value')
-                    //    .then(function(snapshot) {
-                    //        if (_.size(snapshot.val()) > 1) {
-                    //            console.log('match found');
-                    //            //send notification
-                    //        } else {
-                    //            console.log('still looking');
-                    //        }
-                    //    });
+
+                    // create entry for the user
+                    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid).set(true);
+                    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location)
+                        .once('value')
+                        .then(function (matchingUsers) {
+                            if (matchingUsers.numChildren() > 1) {
+                                mVm.statusMessage = 'match found';
+                            } else {
+                                mVm.statusMessage = 'Finding you a match. Please be patient...';
+                            }
+                        });
+
+                    // update the searchPath in the user object
+                    user.searchPath = 'genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/'+ firebase.auth().currentUser.uid;
+                    firebase.database().ref('users/' + userData.key).update(user);
                 });
         }
     }
