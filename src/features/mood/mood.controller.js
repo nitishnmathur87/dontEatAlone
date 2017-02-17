@@ -20,26 +20,43 @@
                 .once('value')
                 .then(function (userData) {
                     var user = userData.val();
+                    console.log('user found ', user);
                     if (user.searchPath) { // if user already had a request before
                         // delete the user entry at searchPath
+                        console.log('deleting searchPath entry for the user');
                         firebase.database().ref(user.searchPath).remove();
                     }
 
                     // create entry for the user
-                    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid).set(true);
-                    firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location)
-                        .once('value')
-                        .then(function (matchingUsers) {
-                            if (matchingUsers.numChildren() > 1) {
-                                mVm.statusMessage = 'match found';
-                            } else {
-                                mVm.statusMessage = 'Finding you a match. Please be patient...';
-                            }
-                        });
+                    // if preference and and user gender is opposite
+                    if ((_.isEqual(user.gender, 'Male') && _.isEqual(mVm.preference.genderPreference, 'Female')) || (_.isEqual(user.gender, 'Female') && _.isEqual(mVm.preference.genderPreference, 'Male'))) {
+                        var oppositeChildRef = firebase.database().ref('genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid);
+                        console.log('creating entry for the user ' + oppositeChildRef);
+                        oppositeChildRef.set(true);
+                        findMatch(firebase.database().ref('genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location));
+                        user.searchPath = 'genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid;
+                    } else {
+                        var genderChildRef = firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid);
+                        console.log('creating entry for the user ' + genderChildRef);
+                        genderChildRef.set(true);
+                        findMatch(firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location));
+                        user.searchPath = 'genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid;
+                    }
 
                     // update the searchPath in the user object
-                    user.searchPath = 'genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/'+ firebase.auth().currentUser.uid;
+                    console.log('updating the user ' + user);
                     firebase.database().ref('users/' + userData.key).update(user);
+                });
+        }
+
+        function findMatch(ref) {
+            ref.once('value')
+                .then(function (matchingUsers) {
+                    if (matchingUsers.numChildren() > 1) {
+                        mVm.statusMessage = 'match found';
+                    } else {
+                        mVm.statusMessage = 'Finding you a match. Please be patient...';
+                    }
                 });
         }
     }
