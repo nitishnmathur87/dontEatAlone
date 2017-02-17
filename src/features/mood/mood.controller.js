@@ -5,7 +5,7 @@
         .controller('MoodController', MoodController);
 
     // @ngInject
-    function MoodController() {
+    function MoodController($state) {
         var mVm = this;
         mVm.preference = {};
         mVm.searchPartners = searchPartners;
@@ -46,12 +46,17 @@
                     // update the searchPath in the user object
                     console.log('updating the user ' + user);
                     firebase.database().ref('users/' + userData.key).update(user);
+
+                    // navigate to app.home.mood.findingMatch state
+
+                    $state.go('app.home.mood.findingMatch');
                 });
         }
 
         function findMatch(ref) {
             ref.once('value')
                 .then(function (matchingUsers) {
+                    mVm.statusMessage = '';
                     if (matchingUsers.numChildren() > 1) {
                         mVm.statusMessage = 'match found';
                     } else {
