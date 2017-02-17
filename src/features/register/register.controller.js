@@ -5,13 +5,14 @@
         .controller('RegisterController', RegisterController);
 
     // @ngInject
-    function RegisterController($firebaseObject, $firebaseAuth, $state, $ionicPush) {
+    function RegisterController($firebaseObject, $firebaseAuth, $state, $ionicPush, $ionicHistory) {
         var registerVm = this;
         registerVm.rootRef = firebase.database().ref();
 
         registerVm.firebaseObject = $firebaseObject(registerVm.rootRef);
 
         registerVm.gotoHome = gotoHome;
+        registerVm.goBack = goBack;
 
         function gotoHome() {
             firebase.auth().createUserWithEmailAndPassword(registerVm.data.email, registerVm.data.password)
@@ -32,6 +33,10 @@
             }).then(function(t) {
                 console.log('Token saved:', t.token);
             });
+        }
+
+        function goBack() {
+            $ionicHistory.goBack();
         }
     }
 }(angular));

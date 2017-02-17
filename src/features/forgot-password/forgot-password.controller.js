@@ -5,13 +5,14 @@
         .controller('ForgotPasswordController', ForgotPasswordController);
 
     // @ngInject
-    function ForgotPasswordController($firebaseObject, $firebaseAuth, $state) {
+    function ForgotPasswordController($firebaseObject, $firebaseAuth, $state, $ionicHistory) {
         var forgotVm = this;
         forgotVm.rootRef = firebase.database().ref();
 
         forgotVm.firebaseObject = $firebaseObject(forgotVm.rootRef);
 
         forgotVm.resetPasswordEmail = resetPasswordEmail;
+        forgotVm.goBack = goBack;
 
         function resetPasswordEmail() {
             var auth = firebase.auth();
@@ -21,6 +22,10 @@
             }, function(error) {
                 alert(error.message);
             });
+        }
+
+        function goBack() {
+            $ionicHistory.goBack();
         }
     }
 }(angular));

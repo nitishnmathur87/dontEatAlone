@@ -58,6 +58,17 @@
                 data: {
                     authenticate: false
                 }
+            })
+            .state('app.home.mood.findingMatch', {
+                url: '/finding-match',
+                views: {
+                    'moodChildView': {
+                        templateUrl: 'components/partials/finding-match.html'
+                    }
+                },
+                data: {
+                    authenticate: false
+                }
             });
     }
 }(angular));
