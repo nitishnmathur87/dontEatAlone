@@ -1,37 +1,47 @@
 <ion-view class="register" cache-view="false">
+    <ion-header-bar align-title="left" class="bar-assertive bar-style">
+        <h1>
+            <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
+            <h3 class="text-white margin-left-10">Don't Eat Alone</h3>
+        </h1>
+    </ion-header-bar>
     <ion-content scroll="true" class="padding">
-        <form name="registerForm" no-validate>
+        <form name="registerForm" no-validate class="transbox">
             <div class="list">
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input">
                     <span class="input-label">First Name</span>
                     <input type="text" placeholder="John" ng-model="registerVm.data.firstName" required>
                 </label>
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input">
                     <span class="input-label">Last Name</span>
                     <input type="text" placeholder="Doe" ng-model="registerVm.data.lastName" required>
                 </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Age</span>
-                    <input type="number" placeholder="12" ng-model="registerVm.data.age" required>
-                </label>
-                <label class="item item-input item-stacked-label">
+                <div class="row">
+                    <label class="item item-input col-40">
+                        <span class="input-label">Age</span>
+                        <input type="number" placeholder="12" ng-model="registerVm.data.age" required>
+                    </label>
+                    <label class="item item-input col-60">
+                        <span class="input-label">Phone</span>
+                        <input type="number" placeholder="Phone Number" ng-model="registerVm.data.phone" required>
+                    </label>
+                </div>
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Gender</span>
+                        <select ng-model="registerVm.data.gender">
+                            <option value="'Female'">Female</option>
+                            <option value="" selected>Male</option>
+                        </select>
+                    </label>
+                </div>
+                <label class="item item-input">
                     <span class="input-label">Email</span>
                     <input type="email" placeholder="abc@xyz.com" ng-model="registerVm.data.email" required>
                 </label>
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input">
                     <span class="input-label">Password</span>
                     <input type="password" placeholder="Password" ng-model="registerVm.data.password" required>
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Phone</span>
-                    <input type="number" placeholder="Phone Number" ng-model="registerVm.data.phone" required>
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Gender</span>
-                    <ion-list>
-                        <ion-radio ng-model="registerVm.data.gender" ng-value="'Male'">Male</ion-radio>
-                        <ion-radio ng-model="registerVm.data.gender" ng-value="'Female'">Female</ion-radio>
-                    </ion-list>
                 </label>
             </div>
             <button class="button button-block button-assertive" ng-click="registerVm.gotoHome()" ng-disabled="registerForm.$invalid">Sign Up</button>

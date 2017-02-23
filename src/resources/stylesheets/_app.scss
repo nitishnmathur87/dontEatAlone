@@ -14,11 +14,13 @@ ion-content {
 }
 
 .input-label {
-    color: whitesmoke;
+    color: white;
+    font-weight: bold;
 }
 
 .text-white {
-    color: whitesmoke;
+    color: white;
+    font-weight: bold;
 }
 
 .comic-sans {
@@ -29,3 +31,29 @@ ion-content {
 .margin-left-10 {
     margin-left: 10px;
 }
+
+button {
+    border-radius: 5px;
+}
+
+.item-input {
+    border-radius: 10px;
+    border: 3px solid darkgray;
+    background: lightgray;
+    margin-bottom: 10px;
+}
+
+.padding-right-10 {
+    padding-right: 10px;
+}
+
+.transbox {
+    margin: 30px;
+    border: 3px solid rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 20px;
+    background: rgba(127, 84, 19, 0.5);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+

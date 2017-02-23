@@ -1,19 +1,17 @@
 <ion-view>
     <ion-content scroll="true" class="padding">
-        <form name="whatToEat">
-            <div class="list">
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label" >What do you want to eat</span>
-                    <ion-list>
-                        <ion-radio ng-value="'Indian'" ng-model="mVm.preference.cuisine">Indian</ion-radio>
-                        <ion-radio ng-value="'Mexican'" ng-model="mVm.preference.cuisine">Mexican</ion-radio>
-                        <ion-radio ng-value="'Chinese'" ng-model="mVm.preference.cuisine">Chinese</ion-radio>
-                        <ion-radio ng-value="'American'" ng-model="mVm.preference.cuisine">American</ion-radio>
-                        <ion-radio ng-value="'Thai'" ng-model="mVm.preference.cuisine">Thai</ion-radio>
-                        <ion-radio ng-value="'Italian'" ng-model="mVm.preference.cuisine">Italian</ion-radio>
-                        <ion-radio ng-value="'Sushi'" ng-model="mVm.preference.cuisine">Sushi</ion-radio>
-                    </ion-list>
-                </label>
+        <form name="whatToEat" class="transbox">
+            <div>
+                <span class="text-white" >Which cuisine do you prefer?</span>
+                <ion-list>
+                    <ion-radio ng-value="'Indian'" ng-model="mVm.preference.cuisine">Indian</ion-radio>
+                    <ion-radio ng-value="'Mexican'" ng-model="mVm.preference.cuisine">Mexican</ion-radio>
+                    <ion-radio ng-value="'Chinese'" ng-model="mVm.preference.cuisine">Chinese</ion-radio>
+                    <ion-radio ng-value="'American'" ng-model="mVm.preference.cuisine">American</ion-radio>
+                    <ion-radio ng-value="'Thai'" ng-model="mVm.preference.cuisine">Thai</ion-radio>
+                    <ion-radio ng-value="'Italian'" ng-model="mVm.preference.cuisine">Italian</ion-radio>
+                    <ion-radio ng-value="'Sushi'" ng-model="mVm.preference.cuisine">Sushi</ion-radio>
+                </ion-list>
             </div>
             <button class="button button-block button-assertive" ui-sref="app.home.mood.locationPreference" ng-disabled="whatToEat.$invalid">Next</button>
         </form>
