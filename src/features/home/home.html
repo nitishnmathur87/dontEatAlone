@@ -1,15 +1,19 @@
 <ion-view class="home" cache-view="false">
-    <ion-header-bar align-title="left" class="bar-assertive bar-style">
+    <!--<ion-header-bar align-title="left" class="bar-assertive bar-style">-->
+        <!--<h1>-->
+            <!--<img class="title-image" src="resources/img/logo.png" width="70" height="70" />-->
+            <!--<h3 class="text-white margin-left-10">Don't Eat Alone</h3>-->
+            <!--<button class="button icon ion-person button-clear button-light pull-right" ng-click="hVm.logout()"><strong>Logout</strong></button>-->
+        <!--</h1>-->
+    <!--</ion-header-bar>-->
+    <ion-content scroll="false">
         <h1>
             <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
-            <h3 class="text-white margin-left-10">Don't Eat Alone</h3>
-            <button class="button icon ion-person button-clear button-light pull-right" ng-click="hVm.logout()"><strong>Logout</strong></button>
+            <span class="text-white margin-left-10">Don't Eat Alone</span>
         </h1>
-    </ion-header-bar>
-    <ion-content scroll="false">
         <ion-nav-view name="moodView"></ion-nav-view>
     </ion-content>
-    <ion-footer-bar class="bar-assertive">
+    <ion-footer-bar class="bar-assertive opacity">
         <button class="button icon-left ion-chevron-left button-clear button-light" ng-click="hVm.goBack()">
             <strong>Back</strong>
         </button>

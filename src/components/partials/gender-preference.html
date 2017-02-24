@@ -4,9 +4,9 @@
             <div>
                 <span class="text-white">With whom would you prefer to go?</span>
                 <ion-list>
-                    <ion-radio ng-value="'Male'" ng-model="mVm.preference.genderPreference">Male</ion-radio>
-                    <ion-radio ng-value="'Female'" ng-model="mVm.preference.genderPreference">Female</ion-radio>
-                    <ion-radio ng-value="'No Preference'" ng-model="mVm.preference.genderPreference">Anyone</ion-radio>
+                    <ion-radio ng-value="'Male'" ng-model="mVm.preference.genderPreference" ng-required="true">Male</ion-radio>
+                    <ion-radio ng-value="'Female'" ng-model="mVm.preference.genderPreference" ng-required="true">Female</ion-radio>
+                    <ion-radio ng-value="'No Preference'" ng-model="mVm.preference.genderPreference" ng-required="true">Anyone</ion-radio>
                 </ion-list>
             </div>
             <button class="button button-block button-assertive"  ng-click="mVm.searchPartners()" ng-disabled="genderPreference.$invalid">Find Me a Match</button>

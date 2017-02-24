@@ -1,11 +1,9 @@
 <ion-view class="register" cache-view="false">
-    <ion-header-bar align-title="left" class="bar-assertive bar-style">
+    <ion-content scroll="true" class="padding">
         <h1>
             <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
-            <h3 class="text-white margin-left-10">Don't Eat Alone</h3>
+            <span class="text-white margin-left-10">Don't Eat Alone</span>
         </h1>
-    </ion-header-bar>
-    <ion-content scroll="true" class="padding">
         <form name="registerForm" no-validate class="transbox">
             <div class="list">
                 <label class="item item-input">
@@ -47,7 +45,7 @@
             <button class="button button-block button-assertive" ng-click="registerVm.gotoHome()" ng-disabled="registerForm.$invalid">Sign Up</button>
         </form>
     </ion-content>
-    <ion-footer-bar class="bar-assertive">
+    <ion-footer-bar class="bar-assertive opacity">
         <button class="button icon-left ion-chevron-left button-clear button-light" ng-click="registerVm.goBack()">
             <strong>Back</strong>
         </button>
