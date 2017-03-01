@@ -15,9 +15,6 @@
         function searchPartners() {
             var user = firebase.auth().currentUser;
             if (user) {
-                var obj = {
-                    uid: firebase.auth().currentUser.uid
-                };
                 firebase.database().ref('users/' + firebase.auth().currentUser.uid)
                     .once('value')
                     .then(function (userData) {
@@ -64,6 +61,25 @@
                     mVm.statusMessage = '';
                     if (matchingUsers.numChildren() > 1) {
                         mVm.statusMessage = 'match found';
+                        cordova.plugins.notification.local.on("trigger", function (notification, state) {
+                            if (state === 'foreground') {
+                                var message = 'Match found. Please contact your match and enjoy your meal';
+                                navigator.notification.alert(message, function() {
+                                    cordova.plugins.notification.local.clear(notification.id, function() {
+                                        //take to match page
+                                    }, 'Notification triggered', 'Close');
+                                });
+                            } else {
+                                cordova.plugins.notification.local.schedule({
+                                    id         : 2,
+                                    title      : 'Match Found',
+                                    text       : 'Please contact your match and enjoy your meal',
+                                    sound      : null,
+                                    autoClear  : false,
+                                    at         : new Date(new Date().getTime() + 10*1000)
+                                });
+                            }
+                        });
                     } else {
                         mVm.statusMessage = 'Finding you a match. Please be patient...';
                     }
