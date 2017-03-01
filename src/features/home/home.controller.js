@@ -9,9 +9,22 @@
         var hVm = this;
         hVm.goBack = goBack;
         hVm.logout = logout;
+        hVm.checkPage = checkPage;
+
+        function checkPage() {
+            if ($state.current.name == 'app.home.mood.whatToEat') {
+                return true;
+            }
+        }
 
         function goBack() {
-            $ionicHistory.goBack();
+            var user = firebase.auth().currentUser;
+
+            if (user) {
+                $ionicHistory.goBack();
+            } else {
+                $state.go('app.login');
+            }
         }
 
         function logout() {

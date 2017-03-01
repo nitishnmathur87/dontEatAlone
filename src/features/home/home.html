@@ -14,7 +14,7 @@
         <ion-nav-view name="moodView"></ion-nav-view>
     </ion-content>
     <ion-footer-bar class="bar-assertive opacity">
-        <button class="button icon-left ion-chevron-left button-clear button-light" ng-click="hVm.goBack()">
+        <button class="button icon-left ion-chevron-left button-clear button-light" ng-disabled="hVm.checkPage()" ng-click="hVm.goBack()">
             <strong>Back</strong>
         </button>
     </ion-footer-bar>
