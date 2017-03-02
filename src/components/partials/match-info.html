@@ -1,0 +1,18 @@
+<ion-view>
+    <ion-content scroll="true" class="padding">
+        <div ng-repeat="matchingUser in mVm.matchingUsers">
+            <div>
+                <span>First Name</span> : <span>{{matchingUser.firstName}}</span>
+            </div>
+            <div>
+                <span>Last Name</span> : <span>{{matchingUser.lastName}}</span>
+            </div>
+            <div>
+                <span>Phone</span> : <span>{{matchingUser.phone}}</span>
+            </div>
+            <div>
+                <span>Email</span> : <span>{{matchingUser.email}}</span>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

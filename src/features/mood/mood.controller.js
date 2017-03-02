@@ -11,6 +11,7 @@
         mVm.searchPartners = searchPartners;
         mVm.statusMessage = '';
         mVm.logOut = logOut;
+        mVm.matchingUsers = [];
 
         function searchPartners() {
             var user = firebase.auth().currentUser;
@@ -18,7 +19,7 @@
             $window.cordova.plugins.notification.local.on("trigger", function (notification, state) {
                 $cordovaDialogs.alert(notification.text, notification.title, 'Okay')
                     .then(function() {
-
+                        $state.go('app.home.mood.match');
                     });
             });
             if (user) {
@@ -53,7 +54,7 @@
 
                         // navigate to app.home.mood.findingMatch state
 
-                        $state.go('app.home.mood.findingMatch');
+                        //$state.go('app.home.mood.findingMatch');
                     });
             } else {
                 $state.go('app.login');
@@ -64,6 +65,15 @@
             ref.on('value', function (matchingUsers) {
                 mVm.statusMessage = '';
                 if (matchingUsers.numChildren() > 1) {
+                    var uids = _.difference(_.keysIn(matchingUsers.val()), [firebase.auth().currentUser.uid]);
+                    _.forEach(uids, function(uid) {
+                        firebase.database().ref('users/' + uid)
+                            .once('value')
+                            .then(function(user) {
+                                mVm.matchingUsers.push(user.val());
+                                console.log(mVm.matchingUsers);
+                            });
+                    });
                     mVm.statusMessage = 'match found';
                     cordova.plugins.notification.local.schedule({
                         id         : 2,

@@ -69,6 +69,17 @@
                 data: {
                     authenticate: false
                 }
+            })
+            .state('app.home.mood.match', {
+                url: '/match-info',
+                views: {
+                    'moodChildView': {
+                        templateUrl: 'components/partials/match-info.html'
+                    }
+                },
+                data: {
+                    authenticate: false
+                }
             });
     }
 }(angular));
