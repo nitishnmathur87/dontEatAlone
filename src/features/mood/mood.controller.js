@@ -5,7 +5,7 @@
         .controller('MoodController', MoodController);
 
     // @ngInject
-    function MoodController($state) {
+    function MoodController($scope, $state, $window, $cordovaDialogs) {
         var mVm = this;
         mVm.preference = {};
         mVm.searchPartners = searchPartners;
@@ -14,15 +14,21 @@
 
         function searchPartners() {
             var user = firebase.auth().currentUser;
+
+            $window.cordova.plugins.notification.local.on("trigger", function (notification, state) {
+                $cordovaDialogs.alert(notification.text, notification.title, 'Okay').
+                    then(function() {
+
+                    });
+            });
             if (user) {
                 firebase.database().ref('users/' + firebase.auth().currentUser.uid)
                     .once('value')
                     .then(function (userData) {
                         var user = userData.val();
-                        console.log('user found ', user);
+
                         if (user.searchPath) { // if user already had a request before
                             // delete the user entry at searchPath
-                            console.log('deleting searchPath entry for the user');
                             firebase.database().ref(user.searchPath).remove();
                         }
 
@@ -30,20 +36,19 @@
                         // if preference and and user gender is opposite
                         if ((_.isEqual(user.gender, 'Male') && _.isEqual(mVm.preference.genderPreference, 'Female')) || (_.isEqual(user.gender, 'Female') && _.isEqual(mVm.preference.genderPreference, 'Male'))) {
                             var oppositeChildRef = firebase.database().ref('genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid);
-                            console.log('creating entry for the user ' + oppositeChildRef);
+
                             oppositeChildRef.set(true);
                             findMatch(firebase.database().ref('genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location));
                             user.searchPath = 'genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid;
                         } else {
                             var genderChildRef = firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid);
-                            console.log('creating entry for the user ' + genderChildRef);
+
                             genderChildRef.set(true);
                             findMatch(firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location));
                             user.searchPath = 'genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid;
                         }
 
                         // update the searchPath in the user object
-                        console.log('updating the user ' + user);
                         firebase.database().ref('users/' + userData.key).update(user);
 
                         // navigate to app.home.mood.findingMatch state
@@ -58,36 +63,27 @@
         function findMatch(ref) {
             ref.once('value')
                 .then(function (matchingUsers) {
-                    mVm.statusMessage = '';
-                    if (matchingUsers.numChildren() > 1) {
-                        mVm.statusMessage = 'match found';
-                        cordova.plugins.notification.local.on("trigger", function (notification, state) {
-                            if (state === 'foreground') {
-                                var message = 'Match found. Please contact your match and enjoy your meal';
-                                navigator.notification.alert(message, function() {
-                                    cordova.plugins.notification.local.clear(notification.id, function() {
-                                        //take to match page
-                                    }, 'Notification triggered', 'Close');
-                                });
-                            } else {
-                                cordova.plugins.notification.local.schedule({
-                                    id         : 2,
-                                    title      : 'Match Found',
-                                    text       : 'Please contact your match and enjoy your meal',
-                                    sound      : null,
-                                    autoClear  : false,
-                                    at         : new Date(new Date().getTime() + 10*1000)
-                                });
-                            }
-                        });
-                    } else {
-                        mVm.statusMessage = 'Finding you a match. Please be patient...';
-                    }
+                    $scope.$watch('matchingUsers', function(oldValue, newValue) {
+                        console.log(oldValue, newValue);
+                        mVm.statusMessage = '';
+                        if (matchingUsers.numChildren() > 1) {
+                            mVm.statusMessage = 'match found';
+                            cordova.plugins.notification.local.schedule({
+                                id         : 2,
+                                title      : 'Match Found',
+                                text       : 'Please contact your match and enjoy your meal',
+                                sound      : null,
+                                autoClear  : false,
+                                at         : new Date()
+                            });
+                        } else {
+                            mVm.statusMessage = 'Finding you a match. Please be patient...';
+                        }
+                    });
                 });
         }
 
         function logOut() {
-            console.log('loggin out');
             firebase.auth().signOut().then(function() {
                 $state.go('app.login');
             })
