@@ -5,7 +5,7 @@
         .controller('MoodController', MoodController);
 
     // @ngInject
-    function MoodController($scope, $state, $window, $cordovaDialogs) {
+    function MoodController($state, $window, $cordovaDialogs) {
         var mVm = this;
         mVm.preference = {};
         mVm.searchPartners = searchPartners;
@@ -16,8 +16,8 @@
             var user = firebase.auth().currentUser;
 
             $window.cordova.plugins.notification.local.on("trigger", function (notification, state) {
-                $cordovaDialogs.alert(notification.text, notification.title, 'Okay').
-                    then(function() {
+                $cordovaDialogs.alert(notification.text, notification.title, 'Okay')
+                    .then(function() {
 
                     });
             });
@@ -61,26 +61,22 @@
         }
 
         function findMatch(ref) {
-            ref.once('value')
-                .then(function (matchingUsers) {
-                    $scope.$watch('matchingUsers', function(oldValue, newValue) {
-                        console.log(oldValue, newValue);
-                        mVm.statusMessage = '';
-                        if (matchingUsers.numChildren() > 1) {
-                            mVm.statusMessage = 'match found';
-                            cordova.plugins.notification.local.schedule({
-                                id         : 2,
-                                title      : 'Match Found',
-                                text       : 'Please contact your match and enjoy your meal',
-                                sound      : null,
-                                autoClear  : false,
-                                at         : new Date()
-                            });
-                        } else {
-                            mVm.statusMessage = 'Finding you a match. Please be patient...';
-                        }
+            ref.on('value', function (matchingUsers) {
+                mVm.statusMessage = '';
+                if (matchingUsers.numChildren() > 1) {
+                    mVm.statusMessage = 'match found';
+                    cordova.plugins.notification.local.schedule({
+                        id         : 2,
+                        title      : 'Match Found',
+                        text       : 'Please contact your match and enjoy your meal',
+                        sound      : null,
+                        autoClear  : false,
+                        at         : new Date()
                     });
-                });
+                } else {
+                    mVm.statusMessage = 'Finding you a match. Please be patient...';
+                }
+            });
         }
 
         function logOut() {
