@@ -1,10 +1,10 @@
 {
-  "name": "App Name here",
-  "version": "0.0.0",
+  "name": "Don't Eat Alone",
+  "version": "0.0.1",
   "authors": [
     "Your Name <your email>"
   ],
-  "description": "App Name here",
+  "description": "Don't Eat Alone",
   "license": "private",
   "dependencies": {
     "angular": "~1.4.5",

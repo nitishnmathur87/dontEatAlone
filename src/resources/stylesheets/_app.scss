@@ -44,6 +44,10 @@ button {
     padding-right: 10px;
 }
 
+.padding-top-50 {
+    padding-top: 50px !important;
+}
+
 .transbox {
     margin: 30px;
     border: 3px solid rgba(0,0,0,0.5);
@@ -70,4 +74,10 @@ button {
     z-index: 10;
 }
 
+.background-image {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../resources/img/bg.jpg');
+}
 

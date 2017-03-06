@@ -8,7 +8,7 @@
     function HomeController($ionicHistory, $state) {
         var hVm = this;
         hVm.goBack = goBack;
-        hVm.logout = logout;
+        hVm.logOut = logOut;
         hVm.checkPage = checkPage;
 
         function checkPage() {
@@ -27,8 +27,7 @@
             }
         }
 
-        function logout() {
-            console.log('loggin out');
+        function logOut() {
             firebase.auth().signOut().then(function() {
                 $state.go('app.login');
             })

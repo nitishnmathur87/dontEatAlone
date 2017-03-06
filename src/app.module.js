@@ -21,7 +21,8 @@
         'app.register',
         'app.forgotPassword',
         'app.home',
-        'app.mood'
+        'app.mood',
+        'app.currentPreference'
     ])
 
         .constant('AvailableLanguages', ['en-US', 'ru-RU', 'el-GR'])

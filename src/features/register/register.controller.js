@@ -36,7 +36,7 @@
         }
 
         function goBack() {
-            $ionicHistory.goBack();
+            $state.go('app.login');
         }
     }
 }(angular));
