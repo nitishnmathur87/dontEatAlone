@@ -1,11 +1,19 @@
-<ion-side-menus enable-menu-with-back-views="true" class="background-image">
-    <ion-side-menu class="background-image" side="left">
-        <ion-content>
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu side="left" style="background: #5B381E;">
+        <ion-content style="background: none;">
             <ion-list>
-                <ion-item nav-clear menu-close class="opacity">
+                <ion-item nav-clear menu-close style="background-color: #5B381E;">
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="hVm.redirectPageAboutApp()" style="background-color: #D1D3D4; opacity: 0.5;">
                     About Us
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="hVm.logOut()" class="opacity">
+                <ion-item nav-clear menu-close ng-click="hVm.redirectPageMood()" style="background-color: #D1D3D4; opacity: 0.5;">
+                    Create a new Preference
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="hVm.redirectPageCurrentPref()" style="background-color: #D1D3D4; opacity: 0.5;">
+                    Existing Preference
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="hVm.logOut()" style="background-color: #D1D3D4; opacity: 0.5;">
                     Logout
                 </ion-item>
             </ion-list>
@@ -20,23 +28,16 @@
 
         </ion-nav-bar>
         <ion-view class="home" cache-view="false">
-        <!--<ion-header-bar align-title="left" class="bar-assertive bar-style">-->
-            <!--<h1>-->
-                <!--<img class="title-image" src="resources/img/logo.png" width="70" height="70" />-->
-                <!--<h3 class="text-white margin-left-10">Don't Eat Alone</h3>-->
-                <!--<button class="button icon ion-person button-clear button-light pull-right" ng-click="hVm.logout()"><strong>Logout</strong></button>-->
-            <!--</h1>-->
-        <!--</ion-header-bar>-->
-        <ion-content scroll="false">
-            <h1>
-                <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
-                <span class="text-white margin-left-10">Don't Eat Alone</span>
-            </h1>
-            <ion-nav-view name="moodView"></ion-nav-view>
-            <div class="back-arrow">
-                <i class="ion-arrow-left-c font-size-large pull-right" ng-if="!hVm.checkPage()" ng-click="hVm.goBack()"></i>
-            </div>
-        </ion-content>
-    </ion-view>
+            <ion-content scroll="false">
+                <h1>
+                    <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
+                    <span class="text-white margin-left-10">Don't Eat Alone</span>
+                </h1>
+                <ion-nav-view name="moodView"></ion-nav-view>
+                <div class="back-arrow">
+                    <i class="ion-arrow-left-c font-size-large pull-right" ng-if="!hVm.checkPage()" ng-click="hVm.goBack()"></i>
+                </div>
+            </ion-content>
+        </ion-view>
     </ion-side-menu-content>
 </ion-side-menus>

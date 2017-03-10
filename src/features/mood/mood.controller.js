@@ -12,15 +12,6 @@
         mVm.statusMessage = '';
         mVm.logOut = logOut;
         mVm.matchingUsers = [];
-        mVm.redirectPage = redirectPage;
-
-        function redirectPage() {
-            if (firebase.auth().currentUser) {
-                $state.go('app.currentPreference');
-            } else {
-                $state.go('app.login');
-            }
-        }
 
         function searchPartners() {
             var user = firebase.auth().currentUser;
