@@ -12,16 +12,12 @@
         mVm.statusMessage = '';
         mVm.logOut = logOut;
         mVm.matchingUsers = [];
+        var userBaseReference;
 
         function searchPartners() {
             var user = firebase.auth().currentUser;
 
-            $window.cordova.plugins.notification.local.on("trigger", function (notification, state) {
-                $cordovaDialogs.alert(notification.text, notification.title, 'Okay')
-                    .then(function() {
-                        $state.go('app.home.mood.match');
-                    });
-            });
+
             if (user) {
                 firebase.database().ref('users/' + firebase.auth().currentUser.uid)
                     .once('value')
@@ -36,17 +32,19 @@
                         // create entry for the user
                         // if preference and and user gender is opposite
                         if ((_.isEqual(user.gender, 'Male') && _.isEqual(mVm.preference.genderPreference, 'Female')) || (_.isEqual(user.gender, 'Female') && _.isEqual(mVm.preference.genderPreference, 'Male'))) {
-                            var oppositeChildRef = firebase.database().ref('genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid);
+                            userBaseReference = 'genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location;
+                            var oppositeChildRef = firebase.database().ref(userBaseReference + '/' + firebase.auth().currentUser.uid);
 
                             oppositeChildRef.set(true);
-                            findMatch(firebase.database().ref('genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location));
-                            user.searchPath = 'genderPref/opposite/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid;
+                            findMatch(firebase.database().ref(userBaseReference));
+                            user.searchPath = userBaseReference + '/' + firebase.auth().currentUser.uid;
                         } else {
-                            var genderChildRef = firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid);
+                            userBaseReference = 'genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location;
+                            var genderChildRef = firebase.database().ref(userBaseReference + '/' + firebase.auth().currentUser.uid);
 
                             genderChildRef.set(true);
-                            findMatch(firebase.database().ref('genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location));
-                            user.searchPath = 'genderPref/' + mVm.preference.genderPreference + '/cuisine/' + mVm.preference.cuisine + '/location/' + mVm.preference.location + '/' + firebase.auth().currentUser.uid;
+                            findMatch(firebase.database().ref(userBaseReference));
+                            user.searchPath = userBaseReference + '/' + firebase.auth().currentUser.uid;
                         }
 
                         // update the searchPath in the user object
@@ -62,27 +60,32 @@
         }
 
         function findMatch(ref) {
+            var messageCount = 0;
             ref.on('value', function (matchingUsers) {
                 mVm.statusMessage = '';
+                mVm.matchingUsers = [];
                 if (matchingUsers.numChildren() > 1) {
-                    var uids = _.difference(_.keysIn(matchingUsers.val()), [firebase.auth().currentUser.uid]);
-                    _.forEach(uids, function(uid) {
-                        firebase.database().ref('users/' + uid)
-                            .once('value')
-                            .then(function(user) {
-                                mVm.matchingUsers.push(user.val());
-                                console.log(mVm.matchingUsers);
-                            });
-                    });
-                    mVm.statusMessage = 'match found';
-                    cordova.plugins.notification.local.schedule({
-                        id         : 2,
-                        title      : 'Match Found',
-                        text       : 'Please contact your match and enjoy your meal',
-                        sound      : null,
-                        autoClear  : false,
-                        at         : new Date()
-                    });
+                    messageCount++;
+                    if (messageCount == 1) {
+                        var uids = _.difference(_.keysIn(matchingUsers.val()), [firebase.auth().currentUser.uid]);
+                        _.forEach(uids, function(uid) {
+                            firebase.database().ref('users/' + uid)
+                                .once('value')
+                                .then(function(user) {
+                                    mVm.matchingUsers.push(user.val());
+                                    console.log(mVm.matchingUsers);
+                                });
+                        });
+                        mVm.statusMessage = 'match found';
+                        cordova.plugins.notification.local.schedule({
+                            id         : Math.round(Math.random() * 10000),
+                            title      : 'Match Found',
+                            text       : 'Please contact your match and enjoy your meal',
+                            sound      : null,
+                            autoClear  : false,
+                            at         : new Date()
+                        });
+                    }
                 } else {
                     mVm.statusMessage = 'Finding you a match. Please be patient...';
                 }
@@ -94,5 +97,12 @@
                 $state.go('app.login');
             })
         }
+
+        $window.cordova.plugins.notification.local.on("trigger", function (notification, state) {
+            $cordovaDialogs.alert(notification.text, notification.title, 'Okay')
+                .then(function() {
+                    $state.go('app.home.mood.match');
+                });
+        });
     }
 }(angular));
