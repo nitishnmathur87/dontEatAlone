@@ -5,7 +5,7 @@
         .controller('MoodController', MoodController);
 
     // @ngInject
-    function MoodController($state, $window, $cordovaDialogs) {
+    function MoodController($state) {
         var mVm = this;
         mVm.preference = {};
         mVm.searchPartners = searchPartners;
@@ -97,12 +97,5 @@
                 $state.go('app.login');
             })
         }
-
-        $window.cordova.plugins.notification.local.on("trigger", function (notification, state) {
-            $cordovaDialogs.alert(notification.text, notification.title, 'Okay')
-                .then(function() {
-                    $state.go('app.home.mood.match');
-                });
-        });
     }
 }(angular));

@@ -4,13 +4,13 @@
             <ion-list>
                 <ion-item nav-clear menu-close style="background-color: #5B381E;">
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="hVm.redirectPageAboutApp()" style="background-color: #D1D3D4; opacity: 0.5;">
+                <ion-item nav-clear menu-close ui-sref="app.aboutApp" style="background-color: #D1D3D4; opacity: 0.5;">
                     About Us
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="hVm.redirectPageMood()" style="background-color: #D1D3D4; opacity: 0.5;">
+                <ion-item nav-clear menu-close ui-sref="app.home.mood.whatToEat" style="background-color: #D1D3D4; opacity: 0.5;">
                     Create a new Preference
                 </ion-item>
-                <ion-item nav-clear menu-close ng-click="hVm.redirectPageCurrentPref()" style="background-color: #D1D3D4; opacity: 0.5;">
+                <ion-item nav-clear menu-close ui-sref="app.currentPreference" style="background-color: #D1D3D4; opacity: 0.5;">
                     Existing Preference
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="hVm.logOut()" style="background-color: #D1D3D4; opacity: 0.5;">
@@ -33,7 +33,7 @@
                     <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
                     <span class="text-white margin-left-10">Don't Eat Alone</span>
                 </h1>
-                <ion-nav-view name="moodView"></ion-nav-view>
+                <ion-nav-view name="homeView"></ion-nav-view>
                 <div class="back-arrow">
                     <i class="ion-arrow-left-c font-size-large pull-right" ng-if="!hVm.checkPage()" ng-click="hVm.goBack()"></i>
                 </div>

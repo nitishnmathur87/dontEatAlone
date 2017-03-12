@@ -10,7 +10,7 @@
             .state('app.aboutApp', {
                 url: '/about-app',
                 views: {
-                    'appView': {
+                    'homeView@app.home': {
                         templateUrl: 'features/about/about-app.html',
                         controller: 'AboutAppController as aVm'
                     }

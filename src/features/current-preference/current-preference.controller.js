@@ -6,15 +6,12 @@
 
     // @ngInject
     function CurrentPreferenceController($ionicHistory, $state) {
+        console.log('in current pref controller');
         var cVm = this;
-        cVm.logOut = logOut;
         cVm.locationPref = '';
         cVm.cuisinePref = '';
         cVm.genderPref = '';
         cVm.searchPath = [];
-        cVm.redirectPageAboutApp = redirectPageAboutApp;
-        cVm.redirectPageMood = redirectPageMood;
-        cVm.redirectPageCurrentPref = redirectPageCurrentPref;
 
         if (firebase.auth().currentUser) {
             firebase.database().ref('users/' + firebase.auth().currentUser.uid)
@@ -31,36 +28,6 @@
                 });
         } else {
             $state.go('app.login');
-        }
-
-        function redirectPageMood() {
-            if (firebase.auth().currentUser) {
-                $state.go('app.home.mood.whatToEat');
-            } else {
-                $state.go('app.login');
-            }
-        }
-
-        function redirectPageAboutApp() {
-            if (firebase.auth().currentUser) {
-                $state.go('app.aboutApp');
-            } else {
-                $state.go('app.login');
-            }
-        }
-
-        function redirectPageCurrentPref() {
-            if (firebase.auth().currentUser) {
-                $state.go('app.currentPreference');
-            } else {
-                $state.go('app.login');
-            }
-        }
-
-        function logOut() {
-            firebase.auth().signOut().then(function() {
-                $state.go('app.login');
-            })
         }
     }
 }(angular));

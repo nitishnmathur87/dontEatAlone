@@ -11,7 +11,7 @@
                 url: '/mood',
                 abstract: true,
                 views: {
-                    'moodView@app.home': {
+                    'homeView@app.home': {
                         templateUrl: 'features/mood/mood.html',
                         controller: 'MoodController as mVm'
                     }

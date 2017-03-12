@@ -2,15 +2,15 @@
     'use strict';
     angular
         .module('app.currentPreference', [])
-        .config(dashConfig);
+        .config(currentPreferenceConfig);
 
     // @ngInject
-    function dashConfig($stateProvider) {
+    function currentPreferenceConfig($stateProvider) {
         $stateProvider
             .state('app.currentPreference', {
                 url: '/current',
                 views: {
-                    'appView': {
+                    'homeView@app.home': {
                         templateUrl: 'features/current-preference/current-preference.html',
                         controller: 'CurrentPreferenceController as cVm'
                     }

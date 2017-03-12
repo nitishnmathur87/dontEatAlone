@@ -1,55 +1,20 @@
-<ion-side-menus enable-menu-with-back-views="true" class="opacity">
-    <ion-side-menu class="opacity" side="left">
-        <ion-content>
-            <ion-list>
-                <ion-item nav-clear menu-close>
-                </ion-item>
-                <ion-item nav-clear menu-close ng-click="cVm.redirectPageAboutApp()">
-                    About Us
-                </ion-item>
-                <ion-item nav-clear menu-close ng-click="cVm.redirectPageMood()">
-                    Create a new Preference
-                </ion-item>
-                <ion-item nav-clear menu-close>
-                    Existing Preference
-                </ion-item>
-                <ion-item nav-clear menu-close ng-click="cVm.logOut()">
-                    Logout
-                </ion-item>
-            </ion-list>
-        </ion-content>
-    </ion-side-menu>
-    <ion-side-menu-content>
-        <ion-nav-bar class="bar-stable">
-            <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-                </button>
-            </ion-nav-buttons>
-
-        </ion-nav-bar>
-        <ion-view cache-view="false">
-            <ion-content scroll="false">
-                <h1>
-                    <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
-                    <span class="text-white margin-left-10">Don't Eat Alone</span>
-                </h1>
-                <form name="currentPreference" class="transbox">
+<ion-view cache-view="false">
+    <ion-content scroll="false">
+        <form name="currentPreference" class="transbox">
+            <div>
+                <span class="text-white">Your Current Preference</span>
+                <div>
                     <div>
-                        <span class="text-white">Your Current Preference</span>
-                        <div>
-                            <div>
-                                <span>You would like to go for a meal with </span> - <span> {{ cVm.genderPref }} </span>
-                            </div>
-                            <div>
-                                <span>Your food preference is </span> - <span> {{ cVm.cuisinePref }} </span>
-                            </div>
-                            <div>
-                                <span>You would like to go for a meal around </span> - <span> {{ cVm.locationPref }} </span>
-                            </div>
-                        </div>
+                        <span>You would like to go for a meal with </span> - <span> {{ cVm.genderPref }} </span>
                     </div>
-                </form>
-            </ion-content>
-        </ion-view>
-    </ion-side-menu-content>
-</ion-side-menus>
+                    <div>
+                        <span>Your food preference is </span> - <span> {{ cVm.cuisinePref }} </span>
+                    </div>
+                    <div>
+                        <span>You would like to go for a meal around </span> - <span> {{ cVm.locationPref }} </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

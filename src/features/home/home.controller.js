@@ -5,7 +5,7 @@
         .controller('HomeController', HomeController);
 
     // @ngInject
-    function HomeController($ionicHistory, $state) {
+    function HomeController($ionicHistory, $state, $window, $cordovaDialogs) {
         var hVm = this;
         hVm.goBack = goBack;
         hVm.logOut = logOut;
@@ -59,5 +59,12 @@
                 $state.go('app.login');
             })
         }
+
+        $window.cordova.plugins.notification.local.on("trigger", function (notification, state) {
+            $cordovaDialogs.alert(notification.text, notification.title, 'Okay')
+                .then(function() {
+                    $state.go('app.home.mood.match');
+                });
+        });
     }
 }(angular));
