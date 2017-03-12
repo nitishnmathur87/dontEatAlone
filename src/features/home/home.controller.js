@@ -39,7 +39,11 @@
         }
 
         function checkPage() {
-            if ($state.current.name == 'app.home.mood.whatToEat') {
+            if ($state.current.name == 'app.home.mood.whatToEat' ||
+                $state.current.name == 'app.currentPreference' ||
+                $state.current.name == 'app.aboutApp' ||
+                $state.current.name == 'app.home.mood.match' ||
+                $state.current.name == 'app.home.mood.findingMatch') {
                 return true;
             }
         }

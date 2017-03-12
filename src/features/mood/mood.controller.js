@@ -17,7 +17,6 @@
         function searchPartners() {
             var user = firebase.auth().currentUser;
 
-
             if (user) {
                 firebase.database().ref('users/' + firebase.auth().currentUser.uid)
                     .once('value')
@@ -87,7 +86,8 @@
                         });
                     }
                 } else {
-                    mVm.statusMessage = 'Finding you a match. Please be patient...';
+                    mVm.statusMessage = 'Finding you a match. Please be patient.';
+                    $state.go('app.home.mood.findingMatch');
                 }
             });
         }
