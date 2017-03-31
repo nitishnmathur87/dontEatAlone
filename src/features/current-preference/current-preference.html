@@ -1,17 +1,17 @@
 <ion-view cache-view="false">
     <ion-content scroll="false">
-        <form name="currentPreference" class="transbox">
+        <form name="currentPreference" class="transbox" style="height: 50%;">
             <div>
-                <span class="text-white">Your Current Preference</span>
-                <div>
+                <h3 class="text-white" align="center"><span class="text-white">Your Current Preference</span></h3>
+                <div style="padding-top: 40px; font-weight: bold;">
                     <div>
-                        <span>You would like to go for a meal with </span> - <span> {{ cVm.genderPref }} </span>
+                        <h4>Want to eat with - <span class="text-white" style="font-style: italic;"> {{ cVm.genderPref }}</span> </h4>
                     </div>
                     <div>
-                        <span>Your food preference is </span> - <span> {{ cVm.cuisinePref }} </span>
+                        <h4>Your food preference is - <span  class="text-white"style="font-style: italic;"> {{ cVm.cuisinePref }} </span> </h4>
                     </div>
                     <div>
-                        <span>You would like to go for a meal around </span> - <span> {{ cVm.locationPref }} </span>
+                        <h4>Location - <span class="text-white" style="font-style: italic;"> {{ cVm.locationPref }}</span> </h4>
                     </div>
                 </div>
             </div>
