@@ -12,19 +12,38 @@
         'pascalprecht.translate',
         'ngIOS9UIWebViewPatch',
         'ui.router',
-        'ionic-material',
         'ui.bootstrap',
+        'firebase',
 
         // services
         'app.auth',
-        'app.login'
+        'app.login',
+        'app.register',
+        'app.forgotPassword',
+        'app.home',
+        'app.mood',
+        'app.currentPreference',
+        'app.aboutApp'
     ])
+
         .constant('AvailableLanguages', ['en-US', 'ru-RU', 'el-GR'])
         .constant('DefaultLanguage', 'en-US')
         .config(translateConfig)
         .config(appConfig)
         .config(ionicConfig)
-        .config(pushConfig);
+        .config(pushConfig)
+        .config(fireBaseConfig);
+
+    // @ngInject
+    function fireBaseConfig(){
+        firebase.initializeApp({
+            apiKey: "AIzaSyDtoIEWU9uFNF_zZu3_O7L85tCBkWrG_Hc",
+            authDomain: "dont-eat-alone-75d39.firebaseapp.com",
+            databaseURL: "https://dont-eat-alone-75d39.firebaseio.com",
+            storageBucket: "dont-eat-alone-75d39.appspot.com",
+            messagingSenderId: "1035774357255"
+        });
+    }
 
     function pushConfig($ionicCloudProvider) {
         $ionicCloudProvider.init({

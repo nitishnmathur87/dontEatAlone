@@ -1,0 +1,23 @@
+<ion-view cache-view="false">
+    <ion-content scroll="false">
+        <form name="currentPreference" class="transbox" style="height: 50%;">
+            <div>
+                <h3 class="text-white" align="center"><span class="text-white">Your Current Preference</span></h3>
+                <div style="padding-top: 40px; font-weight: bold;">
+                    <div>
+                        <h4>Want to eat with - <span class="text-white" style="font-style: italic;"> {{ cVm.genderPref }}</span> </h4>
+                    </div>
+                    <div>
+                        <h4>Your food preference is - <span  class="text-white"style="font-style: italic;"> {{ cVm.cuisinePref }} </span> </h4>
+                    </div>
+                    <div>
+                        <h4>Location - <span class="text-white" style="font-style: italic;"> {{ cVm.locationPref }}</span> </h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Need to see why delete isn't working -->
+            <!--<button class="button button-block button-assertive" ng-click="cVm.deletePref()">Delete Your Preference</button>-->
+        </form>
+    </ion-content>
+</ion-view>

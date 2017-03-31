@@ -7,7 +7,7 @@
     // @ngInject
     function runConfig($ionicAnalytics, $ionicPlatform,
                        $timeout, $cordovaStatusbar, $window, $rootScope, $stateParams,
-                       ionicMaterialInk, CONFIG, $cordovaPushV5, $state, $cordovaDevice, $ionicHistory) {
+                        CONFIG, $cordovaPushV5, $state, $cordovaDevice, $ionicHistory) {
         $ionicPlatform.ready(function () {
             // register for analytics
             if(!CONFIG.devMode) $ionicAnalytics.register();

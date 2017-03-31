@@ -1,5 +1,36 @@
-<ion-view class="login" cache-view="false">
-    <ion-content scroll="true">
-        <button class="button button-block" ng-click="loginVm.registerForPush()">Click For push</button>
+<ion-view class="login" cache-view="false" title="Login">
+    <!--<ion-header-bar align-title="left">-->
+        <!-- -->
+    <!--</ion-header-bar>-->
+    <ion-content scroll="true" class="padding">
+        <h1>
+            <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
+            <span class="text-white margin-left-10 ketchup">Don't Eat Alone</span>
+        </h1>
+        <form name="loginForm" no-validate class="login-form transbox">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="text" ng-model="loginVm.data.username" required>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+                    <input type="password" ng-model="loginVm.data.password" required>
+                </label>
+            </div>
+            <div class="row">
+                <button class="button button-assertive col padding-right-10 button-red"
+                        ng-click="loginVm.login()"
+                        ng-disabled="loginForm.$invalid">Login</button>
+                <div class="button-space"></div>
+                <button class="button button-assertive col button-red"
+                        ui-sref="app.login.register">Sign Up</button>
+            </div>
+            <div style="text-align: center">
+                <button class="button button-clear button-stable"
+                        ui-sref="app.login.forgotPassword">Forgot Password</button>
+            </div>
+
+        </form>
     </ion-content>
 </ion-view>

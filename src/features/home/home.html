@@ -1,0 +1,43 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu side="left" style="background: #5B381E;">
+        <ion-content style="background: none;">
+            <ion-list>
+                <ion-item nav-clear menu-close style="background-color: #5B381E;">
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.aboutApp" style="background-color: #D1D3D4; opacity: 0.5;">
+                    About Us
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.home.mood.whatToEat" style="background-color: #D1D3D4; opacity: 0.5;">
+                    Create a new Preference
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.currentPreference" style="background-color: #D1D3D4; opacity: 0.5;">
+                    Existing Preference
+                </ion-item>
+                <ion-item nav-clear menu-close ng-click="hVm.logOut()" style="background-color: #D1D3D4; opacity: 0.5;">
+                    Logout
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+
+        </ion-nav-bar>
+        <ion-view class="home" cache-view="false">
+            <ion-content scroll="false">
+                <h1 class="ketchup">
+                    <img class="title-image" src="resources/img/logo.png" width="70" height="70" />
+                    <span class="text-white margin-left-10 ketchup">Don't Eat Alone</span>
+                </h1>
+                <ion-nav-view name="homeView" class="myriad-font"></ion-nav-view>
+                <div class="back-arrow">
+                    <i class="ion-arrow-left-c font-size-large pull-right" ng-if="!hVm.checkPage()" ng-click="hVm.goBack()"></i>
+                </div>
+            </ion-content>
+        </ion-view>
+    </ion-side-menu-content>
+</ion-side-menus>

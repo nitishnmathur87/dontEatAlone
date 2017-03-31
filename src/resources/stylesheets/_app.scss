@@ -1,3 +1,116 @@
-.app {
+ion-view {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../resources/img/bg.jpg');
+}
 
+ion-content {
+    background: rgba(198, 51, 51, 0.4);
+    margin-top: 10px;
+    font-family: myriad;
+}
+
+.input-label {
+    color: black;
+    font-weight: bold;
+}
+
+.text-white {
+    color: #CECCCC;
+    font-weight: bold;
+}
+
+.comic-sans {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+button {
+    border-radius: 5px;
+}
+
+.item-input {
+    border-radius: 10px;
+    border: 3px solid darkgray;
+    background: lightgray;
+    margin-bottom: 10px;
+}
+
+.padding-right-10 {
+    padding-right: 10px;
+}
+
+.padding-top-50 {
+    padding-top: 50px !important;
+}
+
+.transbox {
+    margin: 30px;
+    border: 3px solid rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 20px;
+    background: rgba(127, 84, 19, 0.5);
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+
+.opacity {
+    background: rgba(198, 51, 51, 0.4) !important;
+}
+
+.font-size-large {
+    font-size: 50px;
+    color: #CECCCC;
+}
+
+.back-arrow {
+    position: absolute;
+    bottom: 26px;
+    right: 25px;
+    z-index: 10;
+}
+
+.background-image {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../resources/img/bg.jpg');
+}
+
+.button-red {
+    color: #DE4845;
+    opacity: 57%;
+}
+
+.button-space {
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+
+@font-face {
+    font-family: ketchup;
+    src: url('../resources/fonts/delicious_ketchup.ttf') format('truetype');
+}
+
+.ketchup {
+    font-family: ketchup !important;
+    color: #C2CCCC;
+    font-size: 32px;
+}
+
+@font-face {
+    font-family: myriad;
+    src: url('../resources/fonts/Myriad_Pro_Regular.ttf');
+    font-weight: normal;
+}
+
+.myriad-font {
+    font-family: myriad !important;
+    font-weight: bold;
 }

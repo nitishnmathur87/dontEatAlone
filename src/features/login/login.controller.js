@@ -5,53 +5,20 @@
             .controller('LoginController', LoginController);
 
         // @ngInject
-        function LoginController($window, AuthService, $state, $ionicPush) {
+        function LoginController($state, AuthService, $firebaseObject, $firebaseAuth) {
             var loginVm = this;
 
+            loginVm.rootRef = firebase.database().ref();
 
-            loginVm.validateLogin = validateLogin;
-            loginVm.registerForPush = registerForPush;
+            loginVm.firebaseObject = $firebaseObject(loginVm.rootRef);
+            loginVm.login = login;
+            loginVm.data = {};
 
-            function registerForPush() {
-                $ionicPush.register().then(function(t) {
-                    return $ionicPush.saveToken(t);
-                }).then(function(t) {
-                    console.log('Token saved:', t.token);
-                });
-            }
-
-            function validateLogin() {
-                AuthService.authenticate(loginVm.email, loginVm.password)
-                    .then(function(resp) {
-                        _setUpPush();
-                    }, function() {
-
-                    });
-            }
-
-            function _setUpPush() {
-                $window.Ionic.Auth.login('basic', {}, {
-                    'email': loginVm.email,
-                    'password': loginVm.email
-                }).then(function (user) {
-                    AuthService.registerForPush(user, true);
-                }, function() {
-                    // or register and then login
-                    $window.Ionic.Auth.signup({
-                        'email': loginVm.email,
-                        'password': loginVm.email
-                    }).then(function (res) {
-                        $window.Ionic.Auth.login('basic', {}, {
-                            'email': loginVm.email,
-                            'password': loginVm.email
-                        }).then(function (user) {
-                            AuthService.registerForPush(user, true);
-                        }, function() {
-
-                        });
-                    }, function() {
-
-                    });
+            function login() {
+                firebase.auth().signInWithEmailAndPassword(loginVm.data.username, loginVm.data.password).then(function(success) {
+                    $state.go('app.home.mood.whatToEat');
+                }).catch(function(error) {
+                    alert(error.message);
                 });
             }
         }
