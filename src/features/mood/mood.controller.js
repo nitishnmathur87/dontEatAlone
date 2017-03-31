@@ -75,7 +75,7 @@
                                     console.log(mVm.matchingUsers);
                                 });
                         });
-                        mVm.statusMessage = 'match found';
+                        mVm.statusMessage = 'Match Found';
                         cordova.plugins.notification.local.schedule({
                             id         : Math.round(Math.random() * 10000),
                             title      : 'Match Found',

@@ -8,15 +8,16 @@ ion-view {
 ion-content {
     background: rgba(198, 51, 51, 0.4);
     margin-top: 10px;
+    font-family: myriad;
 }
 
 .input-label {
-    color: white;
+    color: black;
     font-weight: bold;
 }
 
 .text-white {
-    color: white;
+    color: #CECCCC;
     font-weight: bold;
 }
 
@@ -64,7 +65,7 @@ button {
 
 .font-size-large {
     font-size: 50px;
-    color: white;
+    color: #CECCCC;
 }
 
 .back-arrow {
@@ -81,3 +82,35 @@ button {
     background-image: url('../resources/img/bg.jpg');
 }
 
+.button-red {
+    color: #DE4845;
+    opacity: 57%;
+}
+
+.button-space {
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+
+@font-face {
+    font-family: ketchup;
+    src: url('../resources/fonts/delicious_ketchup.ttf') format('truetype');
+}
+
+.ketchup {
+    font-family: ketchup !important;
+    color: #C2CCCC;
+    font-size: 32px;
+}
+
+@font-face {
+    font-family: myriad;
+    src: url('../resources/fonts/Myriad_Pro_Regular.ttf');
+    font-weight: normal;
+}
+
+.myriad-font {
+    font-family: myriad !important;
+    font-weight: bold;
+}
