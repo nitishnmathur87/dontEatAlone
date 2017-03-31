@@ -3,21 +3,21 @@
         <h1 class="text-white" align="center">
             Matching Users
         </h1>
-        <!--<div ng-repeat="matchingUser in mVm.matchingUsers">-->
+        <div ng-repeat="matchingUser in mVm.matchingUsers">
             <div class="list list-inset">
                 <div class="item">
-                    <span>First Name</span> : <span>{{mVm.matchingUsers[0].firstName}}</span>
+                    <span>First Name</span> : <span>{{matchingUser.firstName}}</span>
                 </div>
                 <div class="item">
-                    <span>Last Name</span> : <span>{{mVm.matchingUsers[0].lastName}}</span>
+                    <span>Last Name</span> : <span>{{matchingUser.lastName}}</span>
                 </div>
                 <div class="item">
-                    <span>Phone</span> : <span>{{mVm.matchingUsers[0].phone}}</span>
+                    <span>Phone</span> : <span>{{matchingUser.phone}}</span>
                 </div>
                 <div class="item">
-                    <span>Email</span> : <span>{{mVm.matchingUsers[0].email}}</span>
+                    <span>Email</span> : <span>{{matchingUser.email}}</span>
                 </div>
             </div>
-        <!--</div>-->
+        </div>
     </ion-content>
 </ion-view>
